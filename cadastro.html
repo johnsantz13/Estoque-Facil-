@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Cadastro</title>
+    <link rel="stylesheet" href="/estilos/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+</head>
+
+<body>
+    <!--Menu Lateral-->
+    <nav class="menu">
+        <div class="hamburger">
+            <i class="bi bi-list" id="abrir"></i>
+        </div>
+        <ul>
+            <li class="item ativo">
+                <a href="index.html">
+                    <span class="icon"><i class="bi bi-house"></i></span>
+                    <span class="text-link">Home</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="cadastro.html">
+                    <span class="icon"><i class="bi bi-clipboard2-plus"></i></span>
+                    <span class="text-link">Cadastro</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-box-seam-fill"></i></span>
+                    <span class="text-link">Estoque</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-person-square"></i></span>
+                    <span class="text-link">Vendas</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="cozinha.html">
+                    <span class="icon"><i class="bi bi-fork-knife"></i></span>
+                    <span class="text-link">Cozinha</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="fornecedor.html">
+                    <span class="icon"><i class="bi bi-truck"></i></span>
+                    <span class="text-link">Fornecedor</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-coin"></i></span>
+                    <span class="text-link">Simulador</span>
+                </a>
+            </li>
+
+            <li class="item">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-wallet2"></i></span>
+                    <span class="text-link">Caixa</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!--Cabeçalho-->
+    <header>
+        <div class="cab2">
+            <img src="https://img.icons8.com/ios/50/chef-hat.png" alt="chef-hat" />
+            <h2>Cadastro de Ingredientes</h2>
+
+        </div>
+        <p class="txt">Crie fichas técnicas com receituários detalhados para seus produtos</p>
+    </header>
+    <main class="main-cadastro">
+        <section class="section-form">
+            <div class="box1">
+                <h3>Informações do produto</h1>
+            </div>
+            <div class="formulario">
+                <form method="post">
+                    <label for="produto" id="produtos">Nome do Produto*</label>
+                    <br>
+                    <input type="text" name="produto" id="produto" placeholder="Ex: Hamburger Artesanal">
+                    <br>
+                    <label for="vendas" id="vendas">Preço de Venda*</label>
+                    <br>
+                    <input type="number" name="vendas" id="vendas">
+                    <br><br>
+                    <label for="descricao" class="descricao">Descrição</label>
+                    <br>
+                    <textarea name="descricao" id="descricao"></textarea>
+                    <br><br>
+                </form>
+                <p>Adicionar imagem</p>
+                <div class="point">
+                    <p>
+                        <i class="bi bi-camera-fill"></i>
+                        <br>
+                        Escolha a imagem
+                    </p>
+                </div>
+            </div>
+            <section class="section-receita">
+                <h3>Receituario Técnico</h3>
+                <input type="button" value="Adicionar Ingrediente">
+            </section>
+            <div class="receituario">
+                <p>Nenhum Ingrediente adicionado</p>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

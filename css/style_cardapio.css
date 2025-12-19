@@ -1,0 +1,87 @@
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .corTop {
+            background: linear-gradient(90deg, #ffbf94, #ff960d, #ff6905);
+        }
+
+        #banner-carousel {
+            z-index: -1;
+        }
+
+        #corBott {
+            background-color: #fc7443;
+            margin-bottom: 3%;
+            margin-right: 3%;
+        }
+
+        .Foot_Direit {
+            padding-top: 50px;
+        }
+
+        #carda_Cor {
+            font-weight: bold;
+            padding: 20px;
+            color: #FD6306;
+            margin-top: 10px;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        #equipe {
+            padding: 2%;
+        }
+
+        #bi {
+            transform: translateX(190%);
+        }
+        
+
+        .iconeCard {
+            transform: translateX(-50%);
+            color: aliceblue;
+        }
+
+        @media(max-width:1180px) and (min-width: 769px) {
+            
+           body {
+            font-size: 16px;
+           }
+           
+            #bi {
+                transform: translateX(50%);
+            }
+
+            .iconeCard {
+                transform: translateX(50%);
+            }
+            .p-6 {
+                height: 92px;
+            }
+        }
+
+        @media(max-width:768px) {
+
+           body {
+            font-size: 14px;
+           }
+            
+            #bi {
+                transform: translateX(-5%);
+                width: 155px;
+            }
+
+            .iconeCard {
+                transform: translateX(0%);
+            }
+            #corBott {
+                transform: translateX(-25%);
+                width: 244px;
+                margin-right: 0;
+                margin-bottom: 3%;
+            }
+            .p-6 {
+                height: 92px;
+            }
+        }

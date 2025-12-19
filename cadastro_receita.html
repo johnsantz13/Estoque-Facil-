@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Cadastro de Receita</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon (60x40 PNG recomendado) -->
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="font-[Inter,sans-serif] h-screen overflow-hidden">
+
+    <!-- ========== BARRA LATERAL - MODELO FINAL ========== -->
+    <div data-include="sidebar"></div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content" class="relative h-screen overflow-y-auto">
+        <div data-include="header"></div>
+
+        <!-- Conteúdo Específico da Página -->
+        <main class="p-6 space-y-6">
+            <!-- Seção de Informações do Produto -->
+            <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4 mb-6">
+                    <h2 class="text-lg font-semibold text-gray-700 dark:text-white">Informações do Produto/Receita</h2>
+                    <a href="cadastro_produtos.html"
+                        class="text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                        <i class="bi bi-arrow-left mr-2"></i> Voltar
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label for="product-name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do produto</label>
+                        <input type="text" id="product-name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Ex: Hambúrguer Artesanal">
+                    </div>
+
+                    <!-- Linha de Custo e Preço -->
+                    <div>
+                        <label for="total-cost"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Custo Total
+                            (R$)</label>
+                        <input type="text" id="total-cost"
+                            class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white cursor-not-allowed"
+                            placeholder="R$ 0.00" readonly>
+                    </div>
+                    <div>
+                        <label for="product-price"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Preço de venda
+                            (R$)</label>
+                        <input type="number" id="product-price" step="0.01"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="0.00">
+                    </div>
+
+                    <!-- Linha de Lucro Bruto e Margem % -->
+                    <div>
+                        <label for="profit-margin"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lucro Bruto
+                            (R$)</label>
+                        <input type="text" id="profit-margin"
+                            class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white cursor-not-allowed"
+                            placeholder="R$ 0.00" readonly>
+                    </div>
+                    <div>
+                        <label for="profit-margin-percentage"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Margem de Lucro
+                            (%)</label>
+                        <input type="text" id="profit-margin-percentage"
+                            class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white cursor-not-allowed"
+                            placeholder="0.00%" readonly>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="product-description"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                        <textarea id="product-description" rows="3"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Descreva o produto..."></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            for="file_input">Adicionar imagem</label>
+                        <div class="flex items-center justify-center w-full">
+                            <label id="image-preview-container" for="dropzone-file"
+                                class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div id="image-preview-placeholder"
+                                    class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <i class="bi bi-camera-fill text-4xl text-gray-500 dark:text-gray-400"></i>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Clique para enviar</span> ou arraste e solte</p>
+                                </div>
+                                <img id="image-preview" src="#" alt="Pré-visualização da imagem"
+                                    class="hidden absolute top-0 left-0 w-full h-full object-contain rounded-lg p-1" />
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/*" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção do Receituário Técnico -->
+            <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md">
+                <div
+                    class="flex flex-col sm:flex-row justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4 mb-6">
+                    <h2 class="text-lg font-semibold text-gray-700 dark:text-white mb-3 sm:mb-0">Receituário Técnico
+                    </h2>
+                    <button type="button" data-modal-toggle="add-ingredient-modal"
+                        class="text-white inline-flex items-center bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">
+                        <i class="bi bi-plus-circle-fill mr-2"></i>
+                        Adicionar Ingrediente
+                    </button>
+                </div>
+
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Ingrediente</th>
+                                <th scope="col" class="px-6 py-3">Valor (R$)</th>
+                                <th scope="col" class="px-6 py-3">Quantidade</th>
+                                <th scope="col" class="px-6 py-3">Unidade</th>
+                                <th scope="col" class="px-6 py-3 text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ingredients-table-body">
+                            <!-- Linhas de ingredientes serão adicionadas aqui via JS -->
+                        </tbody>
+                        <tfoot id="ingredients-table-footer" class="hidden">
+                            <tr class="font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700">
+                                <th scope="row" class="px-6 py-3 text-base">Custo Total</th>
+                                <td id="total-ingredients-cost" class="px-6 py-3 font-bold">R$ 0.00</td>
+                                <td colspan="3" class="px-6 py-3"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div id="no-ingredients-message" class="text-center text-gray-500 dark:text-gray-400 py-8">
+                    <p>Nenhum ingrediente adicionado. Clique em "Adicionar Ingrediente" para começar.</p>
+                </div>
+            </div>
+
+            <!-- Botão de Salvar -->
+            <div class="flex justify-end pt-2">
+                <button type="button" id="save-recipe-btn"
+                    class="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-10 py-3 text-center">
+                    <i class="bi bi-check-circle-fill mr-2"></i>
+                    Salvar Produto
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Adicionar Ingrediente -->
+    <div id="add-ingredient-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Adicionar Novo Ingrediente
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="add-ingredient-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Fechar modal</span>
+                    </button>
+                </div>
+                <form id="add-ingredient-form" class="p-4 md:p-5">
+                    <div class="grid gap-4 mb-4 grid-cols-2">
+                        <div class="col-span-2">
+                            <label for="ingredient-select"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione o
+                                Ingrediente</label>
+                            <select id="ingredient-select"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                required>
+                                <option value="" disabled selected>Carregando...</option>
+                                <!-- Opções de ingredientes serão populadas via JS -->
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="recipe-ingredient-quantity"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantidade na
+                                Receita</label>
+                            <input type="number" step="0.001" name="recipe-ingredient-quantity"
+                                id="recipe-ingredient-quantity"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Ex: 0.150 para 150g" required>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="text-white inline-flex items-center bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">
+                        <i class="bi bi-plus-circle-fill mr-2"></i>
+                        Adicionar Ingrediente
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/includes.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

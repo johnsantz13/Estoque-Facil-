@@ -1,0 +1,147 @@
+    :root {
+        --cor-fundo: #000;
+        --cor-destaque: #ff6600;
+        --cor-texto: #fff;
+        --cor-secundaria: #dadada;
+        --espacamento: 1rem;
+        --pagamento: #00FF00;
+    }
+
+    /* body {
+    font-family: Arial, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    padding: 0;
+  } */
+
+    /* Fundo escuro */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    /* Modal */
+    .modal {
+        background: var(--cor-secundaria);
+        max-width: 700px;
+        width: 90%;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .modal img {
+        width: 100%;
+        object-fit: cover;
+        max-height: 300px;
+        border-radius: 10px;
+    }
+
+    .modal-left,
+    .modal-right {
+        flex: 1;
+        padding: var(--espacamento);
+    }
+
+    .modal-right h2 {
+        margin-top: 0;
+        color: var(--cor-destaque);
+    }
+
+    .preco {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .quantidade {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .quantidade button {
+        background: var(--cor-destaque);
+        color: var(--cor-texto);
+        border: none;
+        padding: 0.3rem 0.7rem;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .adicionais label {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.2rem 0;
+    }
+
+    textarea {
+        width: 90%;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        resize: none;
+        background: var(--cor-texto);
+        color: var(--cor-fundo);
+        border: 1px solid #444;
+    }
+
+    .total {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+    }
+
+    .botoes {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+
+    .botoes button {
+        background: var(--cor-destaque);
+        color: var(--cor-texto);
+        border: none;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #pagPix {
+        background-color: var(--pagamento);
+    }
+
+    .fechar {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: var(--cor-texto);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+        .modal {
+            flex-direction: column;
+        }
+    }

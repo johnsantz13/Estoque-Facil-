@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Painel da Cozinha</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon (60x40 PNG recomendado) -->
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="font-[Inter,sans-serif] h-screen overflow-hidden">
+
+    <!-- ========== BARRA LATERAL ========== -->
+    <div data-include="sidebar"></div>
+    
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content" class="relative h-screen overflow-y-auto">
+        <div data-include="header"></div>
+
+        <!-- Conteúdo Específico da Página -->
+        <main id="kitchen-board" class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Coluna: Recebido -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Recebido</h2>
+                        <span id="received-count" class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">3</span>
+                    </div>
+                    <div id="received-column" class="space-y-4 p-2 bg-gray-200/80 backdrop-blur-sm dark:bg-gray-800/80 rounded-lg min-h-[60vh]">
+                        <!-- Pedidos de Exemplo -->
+                        <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="01" data-status="recebido">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 01</h3><span class="status-badge bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Recebido</span></div>
+                            <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:30</span><span class="timer font-semibold"></span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">2x</span> Hambúrguer Clássico</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md">Avançar</button></div>
+                        </div>
+                        <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="03" data-status="recebido">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 03</h3><span class="status-badge bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Recebido</span></div>
+                             <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:32</span><span class="timer font-semibold"></span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">1x</span> Batata Frita</li><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">1x</span> Coca-Cola Lata</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md">Avançar</button></div>
+                        </div>
+                        <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="05" data-status="recebido">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 05</h3><span class="status-badge bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Recebido</span></div>
+                             <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:35</span><span class="timer font-semibold"></span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">3x</span> Coca-Cola Lata</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md">Avançar</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna: Em Andamento -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Em Andamento</h2>
+                        <span id="in-progress-count" class="bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">3</span>
+                    </div>
+                    <div id="in-progress-column" class="space-y-4 p-2 bg-gray-200/80 backdrop-blur-sm dark:bg-gray-800/80 rounded-lg min-h-[60vh]">
+                        <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="02" data-status="andamento">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 02</h3><span class="status-badge bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Em Andamento</span></div>
+                            <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:28</span><span class="timer font-semibold">02:15</span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">1x</span> Hambúrguer Clássico</li><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">2x</span> Batata Frita</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-green-500 hover:bg-green-600 px-3 py-1.5 rounded-md">Avançar</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna: Concluído -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Concluído</h2>
+                         <span id="completed-count" class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">3</span>
+                    </div>
+                    <div id="completed-column" class="space-y-4 p-2 bg-gray-200/80 backdrop-blur-sm dark:bg-gray-800/80 rounded-lg min-h-[60vh]">
+                         <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="07" data-status="concluido">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 07</h3><span class="status-badge bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Concluído</span></div>
+                            <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:15</span><span class="timer font-semibold">05:40</span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">1x</span> Hambúrguer Clássico</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-gray-400 cursor-not-allowed px-3 py-1.5 rounded-md" disabled>Finalizado</button></div>
+                        </div>
+                         <div class="order-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md" data-table="08" data-status="concluido">
+                            <div class="flex justify-between items-start mb-2"><h3 class="font-bold text-lg text-gray-800 dark:text-white">Mesa 08</h3><span class="status-badge bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Concluído</span></div>
+                             <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2"><span>Iniciado às: 19:20</span><span class="timer font-semibold">07:12</span></div>
+                            <ul class="space-y-1 mb-4 list-disc list-inside"><li class="text-sm text-gray-600 dark:text-gray-400"><span class="font-semibold">2x</span> Batata Frita</li></ul>
+                            <div class="flex justify-end gap-2"><button class="text-xs font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 px-3 py-1.5 rounded-md">Alerta</button><button class="conclude-btn text-xs font-medium text-white bg-gray-400 cursor-not-allowed px-3 py-1.5 rounded-md" disabled>Finalizado</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/includes.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

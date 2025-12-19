@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Login</title>
+    
+    <!-- Tailwind CSS (Necessário para o Flowbite) -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    
+    <!-- Flowbite CSS & JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Google Fonts: Inter -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Nosso CSS local -->
+    <link rel="stylesheet" href="/css/style-login.css">
+    <!-- Favicon (60x40 PNG recomendado)
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png"> -->
+</head>
+<body>
+
+  <img src="/imagens/logo4.png" alt="Logo Estoque Fácil" class="logo-img">
+
+  <div class="container" role="main">
+    <!-- Seção de Marketing -->
+    <div class="marketing" aria-hidden="true">
+      <h1 class="project-name">Estoque Fácil</h1>
+      <p class="lead">Organize ingredientes, acompanhe o consumo em tempo real e reduza desperdícios com uma plataforma simples, 
+        intuitiva e feita sob medida para a rotina intensa de quem vive sobre rodas.
+         O Estoque Fácil coloca seu estoque na palma da mão — para que você foque no que realmente importa: servir bem e vender mais.</p>
+    </div>
+
+    <!-- Painel de Autenticação -->
+    <div class="panel" aria-labelledby="authHeading">
+      <div>
+        <div class="tabs" role="tablist">
+          <div class="tab active" id="tab-login" role="tab" tabindex="0">Login</div>
+          <div class="tab" id="tab-register" role="tab" tabindex="0">Registre-se</div>
+        </div>
+      </div>
+
+      <!-- Área para notificações -->
+      <div id="messageArea" aria-live="polite">
+        <div id="notification" class="hidden fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-white text-sm font-medium transition-transform duration-300 ease-in-out">
+            <span id="notification-message"></span>
+        </div>
+      </div>
+
+      <!-- Formulário de Login -->
+      <form id="loginForm">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" placeholder="seu@gmail.com" required value="admin@estoquefacil.com">
+
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" placeholder="Sua Senha" required value="">
+
+        <div class="actions">
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="remember" type="checkbox"><label for="remember" class="small"> Lembrar</label>
+          </div>
+          <div class="small"><a href="#" id="forgotLink">Esqueceu a Senha ?</a></div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:6px">
+          <button id="corLog" type="submit" class="btn">login</button>
+          <button type="button" class="ghost" id="toRegister">Crie sua Conta</button>
+        </div>
+      </form>
+
+      <!-- Formulário de Registro -->
+      <form id="registerForm" style="display:none">
+        <label for="regName">Nome Completo</label>
+        <input id="regName" name="name" type="text" placeholder="Nome Completo" required>
+
+        <label for="regEmail">E-mail</label>
+        <input id="regEmail" name="email" type="email" placeholder="seu@email.com" required>
+
+        <div class="row">
+          <div style="flex:1">
+            <label for="regPassword">Senha</label>
+            <input id="regPassword" name="password" type="password" placeholder="Min 6 Caracteres" required>
+          </div>
+          <div style="flex:1">
+            <label for="regPassword2">Confirmar Senha</label>
+            <input id="regPassword2" name="password2" type="password" placeholder="Digite Novamente" required>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:6px">
+          <button id="corLog" type="submit" class="btn">Criar Conta</button>
+          <button type="button" class="ghost" id="toLogin">Voltar ao Login</button>
+        </div>
+      </form>
+
+      <footer>Ao continuar, você aceita os termos de serviço.</footer>
+    </div>
+  </div>
+
+  <!-- Logo SENAI fora do container principal -->
+  <img src="/imagens/SENAI_logo_2024.png" alt="Logo SENAI" class="senai-logo">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

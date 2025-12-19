@@ -1,0 +1,65 @@
+/* Estilos para a barra lateral e transição do conteúdo */
+:root {
+    --font-family-base: 'Inter', sans-serif;
+}
+
+:root {
+    --sidebar-width-collapsed: 80px;
+    --sidebar-width-expanded: 260px;
+}
+
+/* Fonte padrão do projeto */
+body {
+    font-family: var(--font-family-base);
+    overflow-x: hidden; /* evita barra de rolagem horizontal quando sidebar abre/fecha */
+    background: linear-gradient(135deg, #ff8a3d, #ff6a00, #e65c00);
+}
+
+/* Controle via classes: */
+#main-content {
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: var(--sidebar-width-collapsed);
+}
+
+body.sidebar-expanded #main-content {
+    margin-left: var(--sidebar-width-expanded);
+}
+
+.sidebar {
+    width: var(--sidebar-width-collapsed);
+    transition: width 0.3s ease-in-out;
+    overflow-x: hidden; /* garante que conteúdo interno não provoque overflow horizontal */
+    box-sizing: border-box;
+}
+
+.sidebar.expanded {
+    width: var(--sidebar-width-expanded);
+}
+
+.sidebar-link-text {
+    display: inline-block;
+    max-width: 0; /* quando recolhida, não ocupa largura */
+    opacity: 0;
+    transform: translateX(-6px);
+    overflow: hidden;
+    transition: max-width 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+    vertical-align: middle;
+}
+
+.sidebar.expanded .sidebar-link-text {
+    max-width: 240px; /* suficiente para o texto aparecer */
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* CARDÁPIOOOOO!!! */
+
+/*barra de pesquisa*/
+
+#pesquisar{
+    border-radius: 22px;
+    height: 30px;
+    width: 200px;
+    margin-top: 8px;
+}

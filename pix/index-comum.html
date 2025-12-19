@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de QR Code PIX Simples</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>PIX Rápido</h1>
+       
+
+        <form id="pixForm">
+            <div class="form-group">
+                <label for="keyType">Tipo de Chave</label>
+                <select id="keyType" required>
+                    <option value="cpf" selected>CPF</option>
+                    <option value="phone">Celular</option>
+                    <option value="email">E-mail</option>
+                    <option value="random">Chave Aleatória</option>
+                    <option value="cnpj">CNPJ</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pixKey">Sua Chave PIX</label>
+                <input type="text" id="pixKey" placeholder="Digite a chave aqui" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Valor (Opcional)</label>
+                <input type="text" id="amount" placeholder="0.00">
+            </div>
+
+            <button type="submit" class="button">Gerar QR Code</button>
+        </form>
+
+        <div id="result" class="hidden">
+            <div id="qrcode"></div>
+            <textarea id="pixCopyPaste" rows="4" readonly></textarea>
+            <button type="button" id="copyButton" class="button copy-button">Copiar Código</button>
+        </div>
+    </div>
+
+    <script src="qrcode.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

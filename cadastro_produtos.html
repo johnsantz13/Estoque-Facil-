@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Cadastro de Produtos</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon (60x40 PNG recomendado) -->
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="font-[Inter,sans-serif] h-screen overflow-hidden">
+
+    <!-- ========== BARRA LATERAL - MODELO FINAL ========== -->
+    <div data-include="sidebar"></div>
+    
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content" class="relative h-screen overflow-y-auto">
+        <div data-include="header"></div>
+
+        <!-- Conteúdo Específico da Página -->
+        <main class="p-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Coluna de Receitas -->
+                <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-700 dark:text-white">Receitas / Produtos Finais</h2>
+                        <a href="cadastro_receita.html" class="text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-lg flex items-center">
+                            <i class="bi bi-plus-circle-fill mr-2"></i> Cadastrar Nova Receita
+                        </a>
+                    </div>
+                    <div id="recipes-container" class="relative overflow-x-auto">
+                        <ul id="recipes-list" class="space-y-3">
+                            <!-- As receitas serão inseridas aqui pelo script.js -->
+                        </ul>
+                        <div id="no-recipes-msg" class="hidden text-center text-gray-500 dark:text-gray-400 py-8">
+                            <p>Nenhuma receita cadastrada ainda.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Coluna de Ingredientes -->
+                <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-700 dark:text-white">Ingredientes Base</h2>
+                        <a href="cadastro_ingredientes.html" class="text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-lg flex items-center">
+                            <i class="bi bi-plus-circle-fill mr-2"></i> Cadastrar Novo Ingrediente
+                        </a>
+                    </div>
+                    <div class="relative overflow-x-auto">
+                        <ul id="ingredients-list" class="space-y-3">
+                            <!-- Ingredientes base serão inseridos aqui -->
+                        </ul>
+                        <div id="no-ingredients-msg" class="hidden text-center text-gray-500 dark:text-gray-400 py-8">
+                            <p>Nenhum ingrediente base cadastrado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/includes.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

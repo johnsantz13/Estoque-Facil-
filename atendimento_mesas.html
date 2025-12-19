@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Atendimento de Mesas</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon (60x40 PNG recomendado) -->
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="font-[Inter,sans-serif] h-screen overflow-hidden">
+
+    <!-- ========== BARRA LATERAL ========== -->
+    <div data-include="sidebar"></div>
+    
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content" class="relative h-screen overflow-y-auto">
+        <div data-include="header"></div>
+
+        <!-- Conteúdo Específico da Página -->
+        <main class="p-6">
+            <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md">
+                <!-- Grelha de Mesas -->
+                <div id="tables-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- Mesas com novo layout -->
+                    <button type="button" data-modal-toggle="table-options-modal" data-table-number="01" data-status="disponivel" class="table-button flex items-center justify-between p-4 h-24 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition-colors">
+                        <div class="flex flex-col items-start">
+                            <span class="text-sm font-medium">MESA</span>
+                            <span class="text-4xl font-bold">01</span>
+                        </div>
+                        <span class="table-total text-xl font-semibold"></span>
+                    </button>
+                    <button type="button" data-modal-toggle="table-options-modal" data-table-number="02" data-status="atendimento" class="table-button flex items-center justify-between p-4 h-24 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-colors">
+                        <div class="flex flex-col items-start">
+                            <span class="text-sm font-medium">MESA</span>
+                            <span class="text-4xl font-bold">02</span>
+                        </div>
+                        <span class="table-total text-xl font-semibold"></span>
+                    </button>
+                    <button type="button" data-modal-toggle="table-options-modal" data-table-number="03" data-status="indisponivel" class="table-button flex items-center justify-between p-4 h-24 bg-gray-600 text-white rounded-lg shadow-lg hover:bg-gray-700 transition-colors">
+                        <div class="flex flex-col items-start">
+                            <span class="text-sm font-medium">MESA</span>
+                            <span class="text-4xl font-bold">03</span>
+                        </div>
+                        <span class="table-total text-xl font-semibold"></span>
+                    </button>
+                    <button type="button" data-modal-toggle="table-options-modal" data-table-number="04" data-status="reserva" class="table-button flex items-center justify-between p-4 h-24 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 transition-colors">
+                        <div class="flex flex-col items-start">
+                            <span class="text-sm font-medium">MESA</span>
+                            <span class="text-4xl font-bold">04</span>
+                        </div>
+                        <span class="table-total text-xl font-semibold"></span>
+                    </button>
+                    <button type="button" data-modal-toggle="table-options-modal" data-table-number="05" data-status="disponivel" class="table-button flex items-center justify-between p-4 h-24 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition-colors">
+                        <div class="flex flex-col items-start">
+                            <span class="text-sm font-medium">MESA</span>
+                            <span class="text-4xl font-bold">05</span>
+                        </div>
+                        <span class="table-total text-xl font-semibold"></span>
+                    </button>
+                </div>
+
+                <!-- Legenda -->
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-wrap justify-center gap-x-6 gap-y-4">
+                    <div class="flex items-center"><div class="w-5 h-5 rounded-sm bg-green-500 mr-2"></div><span class="text-sm text-gray-700 dark:text-gray-300">Disponível</span></div>
+                    <div class="flex items-center"><div class="w-5 h-5 rounded-sm bg-orange-500 mr-2"></div><span class="text-sm text-gray-700 dark:text-gray-300">Em Atendimento</span></div>
+                    <div class="flex items-center"><div class="w-5 h-5 rounded-sm bg-red-500 mr-2"></div><span class="text-sm text-gray-700 dark:text-gray-300">Reserva</span></div>
+                    <div class="flex items-center"><div class="w-5 h-5 rounded-sm bg-gray-600 mr-2"></div><span class="text-sm text-gray-700 dark:text-gray-300">Não Disponível</span></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL DE OPÇÕES DA MESA -->
+    <div id="table-options-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="table-options-modal">
+                    <i class="bi bi-x-lg"></i><span class="sr-only">Fechar modal</span>
+                </button>
+                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900 p-2 flex items-center justify-center mx-auto mb-3.5">
+                    <i class="bi bi-person-workspace text-2xl text-orange-500"></i>
+                </div>
+                <p id="modal-table-number" class="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">Mesa XX</p>
+                <p id="modal-table-status" class="mb-4 text-lg font-medium">Status</p>
+                <div class="flex flex-col space-y-4">
+                    <button id="modal-start-order-btn" type="button" class="hidden w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        <i class="bi bi-play-circle-fill mr-2"></i>Iniciar Pedido
+                    </button>
+                    <button id="modal-edit-order-btn" type="button" class="hidden w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        <i class="bi bi-pencil-fill mr-2"></i>Editar Pedido
+                    </button>
+                    <button id="modal-change-status-btn" type="button" class="w-full py-3 px-5 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700">
+                        <i class="bi bi-pencil-square mr-2"></i>Alterar Status
+                    </button>
+                    <button type="button" data-modal-hide="table-options-modal" class="w-full py-3 px-5 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:border-gray-500">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL DE ALTERAÇÃO DE STATUS -->
+    <div id="change-status-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="change-status-modal">
+                    <i class="bi bi-x-lg"></i><span class="sr-only">Fechar modal</span>
+                </button>
+                <i class="bi bi-toggles text-4xl mx-auto mb-4 text-gray-400 dark:text-gray-200"></i>
+                <p id="change-status-title" class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Alterar Status da Mesa XX</p>
+                <div class="flex flex-col space-y-4">
+                    <button data-new-status="disponivel" class="change-status-option-btn w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        Marcar como Disponível
+                    </button>
+                    <button data-new-status="atendimento" class="change-status-option-btn w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        Marcar como Em Atendimento
+                    </button>
+                    <button data-new-status="reserva" class="change-status-option-btn w-full text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        Marcar como Reserva
+                    </button>
+                    <button data-new-status="indisponivel" class="change-status-option-btn w-full text-white bg-gray-600 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
+                        Marcar como Não Disponível
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/includes.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

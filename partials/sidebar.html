@@ -1,0 +1,73 @@
+<!-- Partial: sidebar.html -->
+<nav id="sidebar" class="sidebar fixed top-0 left-0 z-40 h-screen bg-white/80 backdrop-blur-sm dark:bg-gray-800/80">
+    <div class="flex flex-col h-full">
+        <!-- Cabeçalho (Fixo) -->
+        <div class="h-16 flex items-center justify-center px-4 shrink-0">
+                <div class="w-full flex items-center justify-center">
+                    <button id="sidebar-toggle" aria-label="Alternar menu" class="text-white hover:text-orange-200 flex items-center justify-center">
+                        <i class="bi bi-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        
+        <!-- Lista de Links (Área de Rolagem) -->
+        <ul class="flex-grow space-y-2 py-4 overflow-y-auto">
+            <li class="px-5">
+                <a href="/dashboard.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-house-door-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Home</span>
+                </a>
+            </li>
+            <li class="px-5">
+                <a href="/cadastro_produtos.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-plus-square-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Cadastro</span>
+                </a>
+            </li>
+            <li class="px-5">
+                <a href="/gestao_estoque.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-box-seam-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Estoque</span>
+                </a>
+            </li>
+            <li class="px-5">
+                <a href="/atendimento_mesas.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-people-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Garçom / Vendas</span>
+                </a>
+            </li>
+            <li class="px-5">
+                <a href="/painel_cozinha.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-display-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Cozinha / Pedidos</span>
+                </a>
+            </li>
+            <li class="px-5">
+                <a href="/fornecedores.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-truck text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Fornecedor</span>
+                </a>
+            </li>
+             <li class="px-5">
+                <a href="/simulador_vendas.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-calculator-fill text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Simulador / Vendas</span>
+                </a>
+            </li>
+             <li class="px-5">
+                <a href="/pdv.html" class="item-menu flex items-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                    <i class="bi bi-cash-stack text-xl w-8 text-center"></i>
+                    <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Gestão / Caixa</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Rodapé (Fixo) -->
+        <div class="shrink-0 p-4 border-t border-orange-700 dark:border-gray-700">
+            <a href="/index.html" class="flex items-center justify-center p-3 rounded-lg text-white hover:bg-orange-700 dark:hover:bg-gray-700">
+                <i class="bi bi-box-arrow-left text-xl w-8 text-center"></i>
+                <span class="sidebar-link-text ml-4 font-medium whitespace-nowrap">Sair</span>
+            </a>
+        </div>
+    </div>
+</nav>

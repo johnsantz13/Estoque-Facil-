@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Fácil - Ponto de Venda (PDV)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon (60x40 PNG recomendado) -->
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="font-[Inter,sans-serif] h-screen overflow-hidden">
+
+    <div data-include="sidebar"></div>
+    
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content" class="relative h-screen grid grid-rows-[auto,1fr]">
+        <div data-include="header"></div>
+
+        <!-- Conteúdo Específico da Página -->
+        <main class="grid grid-cols-12 gap-6 p-6 overflow-auto">
+            <!-- Coluna Esquerda: Mesas em Atendimento -->
+            <div class="col-span-12 lg:col-span-7 bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md flex flex-col">
+                <h2 class="text-xl font-bold mb-4">Selecione a Mesa</h2>
+                <select id="table-select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    <!-- As mesas ativas serão inseridas aqui via JS -->
+                </select>
+            </div>
+            
+            <!-- Coluna Direita: Comanda -->
+            <div class="col-span-12 lg:col-span-5 bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 p-6 rounded-lg shadow-md flex flex-col">
+                <h2 class="text-xl font-bold mb-4">Dados do Pedido</h2>
+                <div id="order-items" class="flex-grow space-y-3 overflow-y-auto">
+                     <p id="empty-order-message" class="text-center text-gray-500 mt-10">Selecione uma mesa para ver o pedido.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t-2 border-dashed">
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+                        <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Atendimento (10%)</span><span id="service-charge">R$ 0,00</span></div>
+                        <div class="flex justify-between font-bold text-xl"><span>Total</span><span id="total">R$ 0,00</span></div>
+                    </div>
+                    <button id="finalize-order-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg disabled:bg-gray-400" disabled>Finalizar Compra</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de QR Code PIX -->
+    <div id="pix-qr-code-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div class="relative p-4 w-full max-w-sm h-full md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="p-6 text-center">
+                    <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Pagamento via PIX</h3>
+                    <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">Aponte a câmera do seu celular para o QR Code abaixo.</p>
+                    <div id="qrcode" class="flex justify-center items-center my-4"></div>
+                    <div class="flex justify-center gap-4 mt-6">
+                        <button id="confirm-payment-btn" type="button" class="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Confirmar Pagamento
+                        </button>
+                        <button id="cancel-payment-btn" type="button" class="text-gray-500 bg-white hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/qrcode.min.js"></script>
+    <script src="/js/includes.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tableSelect = document.getElementById('table-select');
+        const orderItems = document.getElementById('order-items');
+        const emptyOrderMessage = document.getElementById('empty-order-message');
+        const subtotalEl = document.getElementById('subtotal');
+        const serviceChargeEl = document.getElementById('service-charge');
+        const totalEl = document.getElementById('total');
+        const finalizeBtn = document.getElementById('finalize-order-btn');
+        
+        const qrCodeModalEl = document.getElementById('pix-qr-code-modal');
+        const qrcodeContainer = document.getElementById('qrcode');
+        const confirmPaymentBtn = document.getElementById('confirm-payment-btn');
+        const cancelPaymentBtn = document.getElementById('cancel-payment-btn');
+
+        let tables = [];
+        let selectedTableId = null;
+        let qrCodeInstance = null;
+
+        // --- Lógica de Geração do PIX ---
+        const formatField = (id, value) => {
+            const length = value.length.toString().padStart(2, '0');
+            return `${id}${length}${value}`;
+        };
+
+        const calculateCRC16 = (data) => {
+            let crc = 0xFFFF;
+            for (let i = 0; i < data.length; i++) {
+                crc ^= data.charCodeAt(i) << 8;
+                for (let j = 0; j < 8; j++) {
+                    crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+                }
+            }
+            return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        };
+
+        const generatePIXPayload = ({ pixKey, amount }) => {
+            const beneficiaryName = 'EstoqueFacil';
+            const beneficiaryCity = 'Parnaiba';
+            const txid = '***';
+            let payload = '000201' + formatField('26', formatField('00', 'br.gov.bcb.pix') + formatField('01', pixKey)) + '52040000' + '5303986';
+            if (amount && parseFloat(amount) > 0) {
+                payload += formatField('54', parseFloat(amount).toFixed(2));
+            }
+            payload += '5802BR' + formatField('59', beneficiaryName) + formatField('60', beneficiaryCity) + formatField('62', formatField('05', txid)) + '6304';
+            return payload + calculateCRC16(payload);
+        };
+
+        const forceSetupDummyData = () => {
+            const dummyTables = [
+                { id: 'Mesa 1', status: 'occupied', order: [{ name: 'Hambúrguer Clássico', price: 25.90, quantity: 2 }, { name: 'Batata Frita', price: 12.90, quantity: 1 }, { name: 'Coca-Cola Lata', price: 5.00, quantity: 2 }]},
+                { id: 'Mesa 2', status: 'available', order: [] },
+                { id: 'Mesa 3', status: 'occupied', order: [{ name: 'Pão Caseiro', price: 15.00, quantity: 1 }]},
+                { id: 'Mesa 4', status: 'available', order: [] },
+                { id: 'Mesa 5', status: 'available', order: [] },
+                { id: 'Mesa 6', status: 'occupied', order: [{ name: 'Bolo de Chocolate', price: 10.00, quantity: 4 }, { name: 'Leite', price: 4.00, quantity: 4 }]},
+            ];
+            localStorage.setItem('tables', JSON.stringify(dummyTables));
+        };
+
+        const loadTablesFromStorage = () => {
+            tables = JSON.parse(localStorage.getItem('tables')) || [];
+        };
+
+        const saveTablesToStorage = () => {
+            localStorage.setItem('tables', JSON.stringify(tables));
+        };
+
+        const renderTableSelector = () => {
+            tableSelect.innerHTML = '';
+            const occupiedTables = tables.filter(t => t.status === 'occupied');
+            const defaultOption = document.createElement('option');
+            defaultOption.textContent = 'Selecione uma mesa';
+            defaultOption.value = '';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            tableSelect.appendChild(defaultOption);
+            if (occupiedTables.length === 0) {
+                defaultOption.textContent = 'Nenhuma mesa em atendimento';
+                return;
+            }
+            occupiedTables.forEach(table => {
+                const option = document.createElement('option');
+                option.value = table.id;
+                option.textContent = table.id;
+                tableSelect.appendChild(option);
+            });
+        };
+
+        const displayOrder = (tableId) => {
+            if (!tableId) { resetView(); return; }
+            selectedTableId = tableId;
+            const table = tables.find(t => t.id === tableId);
+            if (!table) return;
+            orderItems.innerHTML = '';
+            emptyOrderMessage.classList.add('hidden');
+            let subtotal = 0;
+            table.order.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex justify-between items-center';
+                itemEl.innerHTML = `<div><p class="font-medium text-gray-800 dark:text-white">${item.quantity}x ${item.name}</p><p class="text-sm text-gray-500">R$ ${item.price.toFixed(2)}</p></div><p class="font-semibold">R$ ${(item.quantity * item.price).toFixed(2)}</p>`;
+                orderItems.appendChild(itemEl);
+                subtotal += item.quantity * item.price;
+            });
+            const serviceCharge = subtotal * 0.10;
+            const total = subtotal + serviceCharge;
+            subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
+            serviceChargeEl.textContent = `R$ ${serviceCharge.toFixed(2)}`;
+            totalEl.textContent = `R$ ${total.toFixed(2)}`;
+            finalizeBtn.disabled = false;
+        };
+
+        const resetView = () => {
+            selectedTableId = null;
+            tableSelect.value = '';
+            orderItems.innerHTML = '';
+            emptyOrderMessage.classList.remove('hidden');
+            subtotalEl.textContent = 'R$ 0,00';
+            serviceChargeEl.textContent = 'R$ 0,00';
+            totalEl.textContent = 'R$ 0,00';
+            finalizeBtn.disabled = true;
+        };
+
+        const showModal = () => {
+            qrCodeModalEl.classList.remove('hidden');
+            qrCodeModalEl.classList.add('flex');
+        };
+
+        const hideModal = () => {
+            qrCodeModalEl.classList.add('hidden');
+            qrCodeModalEl.classList.remove('flex');
+        };
+
+        const handleFinalize = () => {
+            if (!selectedTableId) return;
+            const total = parseFloat(totalEl.textContent.replace('R$ ', '').replace(',', '.'));
+            const pixKey = '123.456.789-00';
+            const payload = generatePIXPayload({ pixKey: pixKey, amount: total });
+            qrcodeContainer.innerHTML = '';
+            if (qrCodeInstance) qrCodeInstance.clear();
+            qrCodeInstance = new QRCode(qrcodeContainer, { text: payload, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M });
+            showModal();
+        };
+
+        const handleConfirmPayment = () => {
+            if (!selectedTableId) return;
+            const tableIndex = tables.findIndex(t => t.id === selectedTableId);
+            if (tableIndex > -1) {
+                tables[tableIndex].status = 'available';
+                tables[tableIndex].order = [];
+                saveTablesToStorage();
+            }
+            hideModal();
+            loadTablesFromStorage();
+            renderTableSelector();
+            resetView();
+        };
+
+        tableSelect.addEventListener('change', (e) => { displayOrder(e.target.value); });
+        finalizeBtn.addEventListener('click', handleFinalize);
+        confirmPaymentBtn.addEventListener('click', handleConfirmPayment);
+        cancelPaymentBtn.addEventListener('click', hideModal);
+
+        try {
+            forceSetupDummyData();
+            loadTablesFromStorage();
+            renderTableSelector();
+        } catch (e) {
+            console.error("Erro ao inicializar a página PDV:", e);
+        }
+    });
+    </script>
+</body>
+</html>

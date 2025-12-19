@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <title>Cardápio - Estoque Fácil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" sizes="60x40" href="/imagens/favicon-60x40.png">
+    <link rel="stylesheet" href="/css/style_ModalCarda.css">
+    <link rel="stylesheet" href="/css/style_cardapio.css">
+
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Cabeçalho -->
+    <header class="corTop shadow-md p-4 sticky top-0 z-20">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3">
+                <img src="/imagens/logoB.png" alt="Logo Estoque Fácil" class="h-10">
+                <span class="text-2xl font-bold text-gray-800 hidden sm:inline">Estoque Fácil</span>
+            </a>
+            <a id="bi" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20atendimento."
+                target="_blank" rel="noopener noreferrer"
+                class="bg-green-500 text-white font-bold py-2 px-4 md:px-6 rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2">
+                <i class="bi bi-whatsapp"></i>
+                <span class="hidden md:inline">Solicitar Atendimento</span>
+            </a>
+            <a onclick="abrirCarrinhoModal()" class="relative cursor-pointer">
+                <svg class="iconeCard w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M4 4a1 1 0 0 1 1-1h1.586a1 1 0 0 1 .942.673l.378 1.268A1 1 0 0 1 7.854 6H18a1 1 0 0 1 .957 1.287l-2.11 7.888A2 2 0 0 1 15.053 17H8.245a2 2 0 0 1-1.84-1.215L4.35 6.577A1 1 0 0 1 4 6V4Zm2.47 2L8.2 14.235a1 1 0 0 0 .92.615h6.806a1 1 0 0 0 .92-.615L18.41 7H7.146Z" clip-rule="evenodd"/>
+                </svg>
+                <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Conteúdo do Cardápio -->
+    <main class="container mx-auto px-4 py-12">
+        <h1 id="carda_Cor" class="text-4xl font-bold text-center mb-12 text-gray-800">Nosso Cardápio</h1>
+
+        <!-- Barra de Busca -->
+        <div class="mb-8 max-w-lg mx-auto">
+            <label for="product-search" class="sr-only">Buscar produto</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="bi bi-search text-gray-400"></i>
+                </div>
+                <input type="text" id="product-search"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full pl-10 p-3"
+                    placeholder="Buscar no cardápio...">
+            </div>
+        </div>
+
+        <!-- Abas de Categoria -->
+        <div class="border-b border-gray-200 mb-8">
+            <ul id="category-tabs"
+                class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 justify-center">
+                <li class="me-2"><a href="#" data-category="todos"
+                        class="category-tab inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active">Todos</a>
+                </li>
+                <li class="me-2"><a href="#" data-category="hamburgueres"
+                        class="category-tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Hambúrgueres</a>
+                </li>
+                <li class="me-2"><a href="#" data-category="bebidas"
+                        class="category-tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Bebidas</a>
+                </li>
+                <li class="me-2"><a href="#" data-category="acompanhamentos"
+                        class="category-tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Acompanhamentos</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Lista de Produtos -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Produto 1 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="hamburgueres"
+                data-name="Hambúrguer Clássico" data-price="21.90" data-sku="HB001" data-image="/imagens/cards/burguerClassico.jpg"
+                data-description="Pão brioche, carne 180g, queijo, alface, tomate.">
+                <img src="/imagens/cards/burguerClassico.jpg" alt="Hambúrguer Clássico"
+                    class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Hambúrguer Clássico</h3>
+                    <p class="text-sm text-gray-500 mt-1">Pão brioche, carne 180g, queijo, alface, tomate.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 21,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 2 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="acompanhamentos"
+                data-name="Batata Frita" data-price="12.90" data-sku="AC001" data-image="/imagens/cards/batata-frita.webp"
+                data-description="Porção generosa de batatas crocantes com sal especial.">
+                <img src="/imagens/cards/batata-frita.webp" alt="Batata Frita" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Batata Frita</h3>
+                    <p class="text-sm text-gray-500 mt-1">Porção generosa de batatas crocantes com sal especial.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 12,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 3 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="bebidas"
+                data-name="Coca-Cola Lata" data-price="5.00" data-sku="BB001" data-image="/imagens/cards/cocalata.webp"
+                data-description="350ml, gelada.">
+                <img src="/imagens/cards/cocalata.webp" alt="Coca-Cola Lata" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Coca-Cola Lata</h3>
+                    <p class="text-sm text-gray-500 mt-1">350ml, gelada.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 5,00</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 4 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="hamburgueres"
+                data-name="Hambúrguer Bacon" data-price="29.90" data-sku="HB002" data-image="/imagens/cards/hambuBacon.jpg"
+                data-description="Pão brioche, carne 180g, queijo, bacon crocante e molho especial.">
+                <img src="/imagens/cards/hambuBacon.jpg" alt="Hambúrguer Bacon" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Hambúrguer Bacon</h3>
+                    <p class="text-sm text-gray-500 mt-1">Pão brioche, carne 180g, queijo, bacon crocante e molho
+                        especial.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 29,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 5 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="hamburgueres"
+                data-name="Hambúrguer Duplo" data-price="34.90" data-sku="HB003" data-image="/imagens/cards/duplooooHambu.webp"
+                data-description="Duas carnes de 150g, dobro de queijo alface, tomate e pão australiano.">
+                <img src="/imagens/cards/duplooooHambu.webp" alt="Hambúrguer Duplo" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Hambúrguer Duplo</h3>
+                    <p class="text-sm text-gray-500 mt-1">Duas carnes de 150g, dobro de queijo alface, tomate e pão
+                        australiano.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 34,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 6 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="hamburgueres"
+                data-name="Hambúrguer de Frango" data-price="24.90" data-sku="HB004" data-image="/imagens/cards/hambFrangooo.webp"
+                data-description="Filé de frango empanado, maionese da casa, alface, tomate e cebola roxa.">
+                <img src="/imagens/cards/hambFrangooo.webp" alt="Hambúrguer de Frango" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Hambúrguer de Frango</h3>
+                    <p class="text-sm text-gray-500 mt-1">Filé de frango empanado, maionese da casa, alface, tomate e
+                        cebola roxa.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 24,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 7 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="acompanhamentos"
+                data-name="Onion Rings" data-price="15.90" data-sku="AC002" data-image="/imagens/cards/onion-rings.webp"
+                data-description="Anéis de cebola empanados e fritos. Acompanha molho barbecue.">
+                <img src="/imagens/cards/onion-rings.webp" alt="Onion Rings" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Onion Rings</h3>
+                    <p class="text-sm text-gray-500 mt-1">Anéis de cebola empanados e fritos. Acompanha molho barbecue.
+                    </p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 15,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 8 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="acompanhamentos"
+                data-name="Nuggets de Frango" data-price="14.90" data-sku="AC003" data-image="/imagens/cards/empanado-de-frango.webp"
+                data-description="Porção com 8 unidades de nuggets crocantes acompanha molhos.">
+                <img src="/imagens/cards/empanado-de-frango.webp" alt="Nuggets de Frango"
+                    class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Nuggets de Frango</h3>
+                    <p class="text-sm text-gray-500 mt-1">Porção com 8 unidades de nuggets crocantes acompanha molhos.
+                    </p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 14,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 9 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="acompanhamentos"
+                data-name="Bolinhas de Queijo" data-price="14.90" data-sku="AC004" data-image="/imagens/cards/bolinha-de-queijo.webp"
+                data-description="Bolinhas de Queijo empanadas e fritas. Acompanha molho da casa.">
+                <img src="/imagens/cards/bolinha-de-queijo.webp" alt="Salada Simples" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Bolinhas de Queijo</h3>
+                    <p class="text-sm text-gray-500 mt-1">Bolinhas de Queijo empanadas e fritas. Acompanha molho da
+                        casa.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 14,90</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 10 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="bebidas"
+                data-name="Suco de Laranja" data-price="8.00" data-sku="BB002" data-image="/imagens/cards/sucolaranja.png"
+                data-description="500ml, natural e feito na hora.">
+                <img src="/imagens/cards/sucolaranja.png" alt="Suco de Laranja" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Suco de Laranja</h3>
+                    <p class="text-sm text-gray-500 mt-1">500ml, natural e feito na hora.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 8,00</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 11 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="bebidas"
+                data-name="Água com Gás" data-price="4.00" data-sku="BB003" data-image="/imagens/cards/agua-com-gas.jpg"
+                data-description="500ml, garrafa.">
+                <img src="/imagens/cards/agua-com-gas.jpg" alt="Água com Gás" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Água com Gás</h3>
+                    <p class="text-sm text-gray-500 mt-1">500ml, garrafa.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 4,00</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+            <!-- Produto 12 -->
+            <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col" data-category="bebidas"
+                data-name="Guaraná Antartica" data-price="5.00" data-sku="BB004" data-image="/imagens/cards/guaranaantart.avif"
+                data-description="350ml, lata.">
+                <img src="/imagens/cards/guaranaantart.avif" alt="Guaraná Antartica" class="w-full h-48 object-cover">
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800">Guaraná Antartica</h3>
+                    <p class="text-sm text-gray-500 mt-1">350ml, lata.</p>
+                </div>
+                <div class="p-6 pt-0 flex items-center justify-between">
+                    <span class="text-2xl font-bold text-orange-600">R$ 5,00</span>
+                    <button onclick="abrirModalProduto(this)"
+                        class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- banner -->
+    <!-- Carrossel de Banners -->
+    <div id="banner-carousel" class="relative w-full" data-carousel="slide">
+        <!-- Itens do Carrossel -->
+        <div class="relative overflow-hidden aspect-[16/6] md:aspect-[16/5]">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="/imagens/banner/BANNER1.jpg" class="absolute block w-full h-full object-cover" alt="Banner 1">
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="/imagens/banner/BANNER2.jpg" class="absolute block w-full h-full object-cover" alt="Banner 2">
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="/imagens/banner/BANNER3.jpg" class="absolute block w-full h-full object-cover" alt="Banner 3">
+            </div>
+            <!-- Item 4 -->
+        </div>
+        <!-- Indicadores -->
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                data-carousel-slide-to="0"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                data-carousel-slide-to="1"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                data-carousel-slide-to="2"></button>
+        </div>
+        <!-- Controles de Navegação -->
+        <button type="button"
+            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-prev>
+            <span
+                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <i class="bi bi-chevron-left text-white"></i>
+                <span class="sr-only">Anterior</span>
+            </span>
+        </button>
+        <button type="button"
+            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-next>
+            <span
+                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <i class="bi bi-chevron-right text-white"></i>
+                <span class="sr-only">Próximo</span>
+            </span>
+        </button>
+    </div>
+
+
+
+    <!-- Rodapé -->
+    <footer id="equipe" class="bg-white text-center py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-600 text-sm items-center">
+                <div>
+                    <h4 class="font-bold text-base mb-2 uppercase tracking-wider">Equipe</h4>
+                    <ul class="space-y-1">
+                        <li>JOÃO VICTOR</li>
+                        <li>BRENO RODRIGUES</li>
+                        <li>THIAGO OLIVEIRA</li>
+                        <li>CARLOS HENRIQUE</li>
+                        <li>ANTONIO RODRIGO</li>
+                    </ul>
+                </div>
+                <div class="flex justify-center">
+                    <img src="/imagens/SENAI.png" alt="Logo SENAI" class="h-16 opacity-80">
+                </div>
+                <div>
+                    <h4 class="font-bold text-base mb-2 uppercase tracking-wider">Orientador(es)</h4>
+                    <ul class="space-y-1">
+                        <li>LUZARDO LUSTOSA SILVA</li>
+                        <li>ROMANO OLIVEIRA DE MESQUITA</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="Foot_Direit text-gray-600 mb-8">&copy; 2025 Estoque Fácil. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Detalhes do Produto -->
+    <div class="overlay" id="product-modal-overlay" onclick="fecharModalProduto(event)">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloProduto">
+            <button class="fechar" onclick="fecharModalProduto()">×</button>
+            <div class="modal-left">
+                <img id="modal-img" src="/imagens/cards/burguerClassico.jpg" alt="Hambúrguer">
+            </div>
+            <div class="modal-right">
+                <h2 id="tituloProduto">Hambúrguer Clássico</h2>
+                <p id="modal-sku">SKU: HB001</p>
+                <p class="preco">R$ <span id="precoBase">21.90</span></p>
+
+                <div class="quantidade">
+                    <button onclick="alterarQtd(-1)">−</button>
+                    <span id="quantidade">1</span>
+                    <button onclick="alterarQtd(1)">+</button>
+                </div>
+
+                <div class="adicionais">
+                    <h3>Adicionais:</h3>
+                    <label><span>Queijo Extra (+R$ 3,00)</span><input type="checkbox" value="3.00" data-text="Queijo Extra"></label>
+                    <label><span>Bacon (+R$ 4,00)</span><input type="checkbox" value="4.00" data-text="Bacon"></label>
+                    <label><span>Molho Especial (+R$ 2,00)</span><input type="checkbox" value="2.00" data-text="Molho Especial"></label>
+                    <label><span>Ovo (+R$ 3,00)</span><input type="checkbox" value="3.00" data-text="Ovo"></label>
+                    <label><span>Blend 150g (+R$ 8,00)</span><input type="checkbox" value="8.00" data-text="Blend 150g"></label>
+                </div>
+
+                <textarea id="modal-obs" placeholder="Observações..."></textarea>
+
+                <div class="total">
+                    Total: R$ <span id="total">21.90</span>
+                </div>
+
+                <div class="botoes">
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal do Carrinho de Compras -->
+    <div class="overlay" id="cart-modal-overlay" onclick="fecharCarrinhoModal(event)">
+        <div class="modal-cart" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+            <div class="modal-cart-header">
+                <h2 id="cart-title">Meu Carrinho</h2>
+                <button class="fechar" onclick="fecharCarrinhoModal()">×</button>
+            </div>
+            <div id="cart-items-container" class="modal-cart-body">
+                <!-- Itens do carrinho serão inseridos aqui pelo JS -->
+                <p id="empty-cart-msg" class="empty-cart-msg">Seu carrinho está vazio.</p>
+            </div>
+            <div class="modal-cart-footer">
+                <div class="cart-total">
+                    <strong>Total:</strong>
+                    <span id="cart-total-price">R$ 0,00</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-secondary" onclick="limparCarrinho()">Limpar Carrinho</button>
+                    <button class="btn-primary" onclick="finalizarCompraWhatsApp()">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/script_Modal.js"></script>
+
+</body>
+
+</html>
